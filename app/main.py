@@ -1,10 +1,10 @@
-from typing import Callable
+from typing import Callable, Any
 
 
 def cache(func: Callable) -> Callable:
     cache1 = {}
 
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, **kwargs) -> Any:
 
         key = ":".join([str(num) for num in args])
 
