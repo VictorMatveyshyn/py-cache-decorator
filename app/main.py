@@ -7,6 +7,9 @@ def cache(func: Callable) -> Callable:
     def wrapper(*args, **kwargs) -> Any:
 
         key = ":".join([str(num) for num in args])
+        key2 = ":".join([str(key) + ":" + str(val)
+                         for key, val in kwargs.items()])
+        key = key + ":" + key2
         answer = cache2.get(key)
         if answer is None:
             print("Calculating new result")
