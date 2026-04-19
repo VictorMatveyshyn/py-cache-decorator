@@ -10,12 +10,12 @@ def cache(func: Callable) -> Callable:
         key2 = ":".join([str(key) + ":" + str(val)
                          for key, val in kwargs.items()])
         key = key + ":" + key2
-        answer = cache.get(key)
         if key not in cache:
             print("Calculating new result")
             answer = func(*args, **kwargs)
             cache[key] = answer
         else:
+            answer = cache.get(key)
             print("Getting from cache")
         return answer
     return wrapper
