@@ -1,7 +1,4 @@
-from typing import (
-    Callable,
-    Any
-)
+from typing import Callable, Any
 from functools import wraps
 
 
@@ -11,16 +8,11 @@ def cache(func: Callable) -> Callable:
     @wraps(func)
     def wrapper(*args, **kwargs) -> Any:
 
-        key = ":".join([str(num) for num in args])
-        key2 = ":".join([str(key) + ":" + str(val)
-                         for key, val in kwargs.items()])
-        key = key + ":" + key2
+        key = args, tuple(sorted(kwargs.items()))
         if key not in cache:
             print("Calculating new result")
-            answer = func(*args, **kwargs)
-            cache[key] = answer
+            cache[key] = func(*args, **kwargs)
         else:
-            answer = cache.get(key)
             print("Getting from cache")
-        return answer
+        return cache.get(key)
     return wrapper
