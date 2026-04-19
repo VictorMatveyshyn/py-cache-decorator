@@ -1,9 +1,14 @@
-from typing import Callable, Any
+from typing import (
+    Callable,
+    Any
+)
+from functools import wraps
 
 
 def cache(func: Callable) -> Callable:
     cache = {}
 
+    @wraps(func)
     def wrapper(*args, **kwargs) -> Any:
 
         key = ":".join([str(num) for num in args])
