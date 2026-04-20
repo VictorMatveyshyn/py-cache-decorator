@@ -15,4 +15,3 @@ def cache(func: Callable) -> Callable:
             print("Getting from cache")
         return cache.get(key)
     return wrapper
-
